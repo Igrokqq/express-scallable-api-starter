@@ -1,0 +1,34 @@
+{
+    "extends": ["airbnb-base", "plugin:node/recommended"],
+    "env": {
+        "es2020": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 11,
+        "sourceType": "module"
+    },
+    "rules": {
+        "consistent-return": "warn",
+        "max-len": "warn",
+        "strict": 0,
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "indent": [
+            "error",
+            2
+        ],
+        "no-console": 0,
+        "no-var": "error",
+        "no-shadow": "warn",
+        "no-process-exit": "warn",
+        "no-return-await": "off",
+        "no-unused-vars": "warn",
+        "no-useless-constructor": "warn",
+        "no-useless-concat": "warn",
+        "no-useless-return": "off",
+        "no-underscore-dangle": "off"
+    }
+}
