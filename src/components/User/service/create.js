@@ -1,3 +1,3 @@
-const UserRepository = require('../repository');
+const create = require('../repository/create');
 
-module.exports = (user) => UserRepository.create(user);
+module.exports = (user) => create(user);

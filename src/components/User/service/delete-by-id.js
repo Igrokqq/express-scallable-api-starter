@@ -1,3 +1,3 @@
-const UserRepository = require('../repository');
+const deleteById = require('../repository/delete-by-id');
 
-module.exports = (id) => UserRepository.deleteById(id);
+module.exports = (id) => deleteById(id);

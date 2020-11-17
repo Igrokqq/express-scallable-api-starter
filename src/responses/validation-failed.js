@@ -1,9 +1,10 @@
-const BaseResponse = require('./base.response');
+const BaseResponse = require('./base');
 
 /**
  * @exports
+ * @extends Error
  */
-class ConflictResponse extends BaseResponse {
+class ValidationFailed extends BaseResponse {
   /**
      * @constructor
      * @param {string} message
@@ -11,10 +12,10 @@ class ConflictResponse extends BaseResponse {
      */
   constructor(message = '', details = null) {
     super();
-    this.status = this.httpCodes.CONFLICT;
+    this.status = this.httpCodes.VALIDATION_FAILED;
     this.message = message;
     this.details = details;
-    this.name = 'E_CONFLICT';
+    this.name = 'E_VALIDATION_FAILED';
   }
 
   get body() {
@@ -26,4 +27,4 @@ class ConflictResponse extends BaseResponse {
   }
 }
 
-module.exports = ConflictResponse;
+module.exports = ValidationFailed;

@@ -1,9 +1,9 @@
-const BaseResponse = require('./base.response');
+const BaseResponse = require('./base');
+
 /**
  * @exports
- * @extends Error
  */
-class NotFoundResponse extends BaseResponse {
+class Conflict extends BaseResponse {
   /**
      * @constructor
      * @param {string} message
@@ -11,10 +11,10 @@ class NotFoundResponse extends BaseResponse {
      */
   constructor(message = '', details = null) {
     super();
-    this.status = this.httpCodes.NOT_FOUND;
+    this.status = this.httpCodes.CONFLICT;
     this.message = message;
     this.details = details;
-    this.name = 'E_NOT_FOUND';
+    this.name = 'E_CONFLICT';
   }
 
   get body() {
@@ -26,4 +26,4 @@ class NotFoundResponse extends BaseResponse {
   }
 }
 
-module.exports = NotFoundResponse;
+module.exports = Conflict;

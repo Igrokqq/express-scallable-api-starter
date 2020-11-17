@@ -1,20 +1,22 @@
-const UserValidation = require('../validation');
-const UserService = require('../service');
-
-const CreatedResponse = require('../../../responses/created.response');
-const ConflictResponse = require('../../../responses/conflict.response');
+const validateCreate = require('../validation/create');
+const checkIfExist = require('../service/check-if-exist');
+const create = require('../service/create');
 
 module.exports = {
-  dto: (data) => UserValidation.create(data),
+  dto: (inputs) => validateCreate(inputs.body),
 
-  fn: async (inputs) => {
-    const userExists = await UserService.checkIfExist(inputs);
+  // constants: {
+  //   TEST_CONSTANT: 'test',
+  // },
+
+  async fn(inputs) {
+    const userExists = await checkIfExist(inputs.body);
 
     if (userExists) {
-      return new ConflictResponse('User already exists');
+      return new this.ConflictResponse('User already exists');
     }
-    await UserService.create(inputs);
+    await create(inputs.body);
 
-    return new CreatedResponse();
+    return new this.CreatedResponse();
   },
 };

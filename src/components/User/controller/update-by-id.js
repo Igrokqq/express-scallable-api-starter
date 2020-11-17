@@ -1,15 +1,17 @@
-const UserValidation = require('../validation');
-const UserService = require('../service');
-
-const OkResponse = require('../../../responses/ok.response');
+const validateUpdateById = require('../validation/update-by-id');
+const updateById = require('../service/update-by-id');
 
 module.exports = {
-  dto: (inputs) => UserValidation.updateById(inputs),
+  dto: (inputs) => validateUpdateById({
+    ...inputs.params,
+    ...inputs.body,
+  }),
 
-  fn: async (inputs) => {
-    const { id, ...data } = inputs;
-    const user = await UserService.updateById(id, data);
+  fn: async ({ body, params }) => {
+    const { id } = params;
 
-    return new OkResponse(user);
+    const user = await updateById(id, body);
+
+    return new this.OkResponse(user);
   },
 };

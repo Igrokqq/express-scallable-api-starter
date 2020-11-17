@@ -17,4 +17,22 @@ const connectOptions = {
   useUnifiedTopology: true,
 };
 
-module.exports = mongoose.createConnection(MONGODB_URI, connectOptions);
+const connection = mongoose.createConnection(MONGODB_URI, connectOptions);
+
+connection.on('open', () => {
+  console.info('database is ready now');
+});
+
+connection.on('connected', () => {
+  console.info('you was successfully connected to mongodb');
+});
+
+connection.on('disconnected', () => {
+  console.error('you was disconnected from mongodb');
+});
+
+connection.on('error', (error) => {
+  console.error(`Oops... Mongoose error ${error}`);
+});
+
+module.exports = connection;

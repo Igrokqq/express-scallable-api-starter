@@ -1,10 +1,10 @@
-const BaseResponse = require('./base.response');
+const BaseResponse = require('./base');
 
 /**
  * @exports
  * @extends Error
  */
-class ForbiddenResponse extends BaseResponse {
+class Forbidden extends BaseResponse {
   /**
      * @constructor
      * @param {string} message
@@ -27,4 +27,4 @@ class ForbiddenResponse extends BaseResponse {
   }
 }
 
-module.exports = ForbiddenResponse;
+module.exports = Forbidden;

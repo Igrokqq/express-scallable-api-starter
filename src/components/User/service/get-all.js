@@ -1,3 +1,3 @@
-const UserRepository = require('../repository');
+const getAll = require('../repository/get-all');
 
-module.exports = () => UserRepository.getAll();
+module.exports = () => getAll();

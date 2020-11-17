@@ -1,3 +1,3 @@
-const UserRepository = require('../repository');
+const updateById = require('../repository/update-by-id');
 
-module.exports = (id, data) => UserRepository.updateById(id, data);
+module.exports = (id, data) => updateById(id, data);

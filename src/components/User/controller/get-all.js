@@ -1,10 +1,9 @@
-const UserService = require('../service');
-const OkResponse = require('../../../responses/ok.response');
+const getAll = require('../service/get-all');
 
 module.exports = {
   fn: async () => {
-    const users = await UserService.getAll();
+    const users = await getAll();
 
-    return new OkResponse(users);
+    return new this.OkResponse(users);
   },
 };

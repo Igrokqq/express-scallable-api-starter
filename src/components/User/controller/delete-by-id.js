@@ -1,14 +1,13 @@
-const UserService = require('../service');
-const UserValidation = require('../validation');
-
-const OkResponse = require('../../../responses/ok.response');
+const deleteById = require('../service/delete-by-id');
+const validateDeleteById = require('../validation/delete-by-id');
 
 module.exports = {
-  dto: (inputs) => UserValidation.deleteById(inputs),
+  dto: (inputs) => validateDeleteById(inputs.params),
 
-  fn: async ({ id }) => {
-    const user = await UserService.deleteById(id);
+  fn: async ({ params }) => {
+    const { id } = params;
+    const user = await deleteById(id);
 
-    return new OkResponse(user);
+    return new this.OkResponse(user);
   },
 };

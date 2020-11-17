@@ -1,6 +1,6 @@
 const HttpCodes = require('../config/constants/http-codes');
 
-class BaseResponse {
+class Base {
   constructor() {
     this._httpCodes = HttpCodes;
   }
@@ -10,4 +10,4 @@ class BaseResponse {
   }
 }
 
-module.exports = BaseResponse;
+module.exports = Base;

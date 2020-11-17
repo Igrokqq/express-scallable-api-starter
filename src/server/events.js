@@ -9,18 +9,20 @@ function onError(error, port) {
     throw error;
   }
 
-  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
+  const bind = typeof port === 'string'
+    ? `Pipe ${port}`
+    : `Port ${port}`;
 
-  switch (error.code) {
-    case 'EACCES':
-      console.error(`${bind} requires elevated privileges`);
-      process.exit(1);
-    case 'EADDRINUSE':
-      console.error(`${bind} is already in use`);
-      process.exit(1);
-    default:
-      throw error;
+  if (error.code === 'EACCES') {
+    console.error(`${bind} requires elevated privileges`);
+    process.exit(1);
   }
+  if (error.code === 'EADDRINUSE') {
+    console.error(`${bind} is already in use`);
+    process.exit(1);
+  }
+
+  throw error;
 }
 /**
  * @function

@@ -1,9 +1,9 @@
-const BaseResponse = require('./base.response');
+const BaseResponse = require('./base');
 /**
  * @exports
  * @extends Error
  */
-class CreatedResponse extends BaseResponse {
+class Created extends BaseResponse {
   /**
    * @constructor
    */
@@ -13,4 +13,4 @@ class CreatedResponse extends BaseResponse {
   }
 }
 
-module.exports = CreatedResponse;
+module.exports = Created;

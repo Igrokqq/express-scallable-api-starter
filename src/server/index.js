@@ -1,7 +1,6 @@
-const http = require('http');
-const events = require('./events');
+const express = require('express');
 const server = require('./server');
 
-const port = server.get('port');
+const app = express();
 
-events.bind(http.createServer(server).listen(port), port);
+server.init(app);

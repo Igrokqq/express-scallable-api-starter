@@ -1,30 +1,24 @@
+const http = require('http');
+
 const { join } = require('path');
 require('dotenv').config({
   path: join(`${__dirname}/../../.env`),
 });
-const express = require('express');
 const middleware = require('../config/middleware');
-const routes = require('../config/router');
+const pipeline = require('../config/pipeline');
 
-/**
- * @type {express}
- * @constant {express.Application}
- */
-const app = express();
+const events = require('./events');
 
-/**
- * @description express.Application Middleware
- */
-middleware.init(app);
+module.exports = {
+  init: (app) => {
+    middleware(app);
+    pipeline(app);
 
-/**
- * @description express.Application Routes
- */
-routes.init(app);
+    const port = process.env.PORT || 3000;
+    const server = http.createServer(app).listen(port, () => {
+      console.log(`Server is listening on ${port} port`);
+    });
 
-/**
- * @description sets port 3000 to default or unless otherwise specified in the environment
- */
-app.set('port', process.env.PORT || 3000);
-
-module.exports = app;
+    return events.bind(server, port);
+  },
+};

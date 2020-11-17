@@ -1,25 +1,9 @@
-const responsesFilter = require('../filters/responses.filter');
-const ValidationFailedResponse = require('../responses/validation-failed.response');
+const responsesFilter = require('../filters/responses');
+const buildResponsesInContext = require('./build-responses-in-context');
+const callControllerMethod = require('./call-controller-method');
 
-module.exports = (targetMethod) => (req, res, next) => {
-  const handler = targetMethod.fn;
+module.exports = (targetMethod) => async function (req, res, next) {
+  const context = buildResponsesInContext({ req, res, next });
 
-  responsesFilter(async (req) => {
-    const inputs = {
-      ...req.body,
-      ...req.params,
-    };
-
-    if (targetMethod.dto) {
-      const { error } = await targetMethod.dto(inputs);
-
-      if (error) {
-        return new ValidationFailedResponse(error.details);
-      }
-    }
-
-    const handlerResponse = await handler(inputs);
-
-    return handlerResponse;
-  }).call(null, req, res, next);
+  await responsesFilter.call(context, callControllerMethod(context, targetMethod));
 };

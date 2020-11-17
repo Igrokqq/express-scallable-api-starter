@@ -1,7 +1,7 @@
-const UsersRepository = require('../repository');
+const getById = require('../repository/get-by-id');
 
 module.exports = async (id) => {
-  const foundUser = await UsersRepository.getById(id);
+  const foundUser = await getById(id);
 
   return foundUser || null;
 };

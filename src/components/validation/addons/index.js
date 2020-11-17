@@ -1,4 +1,4 @@
-const objectId = require('./object-id.addon');
+const objectId = require('./object-id');
 
 module.exports = [
   objectId,
