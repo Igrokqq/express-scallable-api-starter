@@ -7,7 +7,7 @@ module.exports = {
     ...inputs.body,
   }),
 
-  fn: async ({ body, params }) => {
+  async fn({ body, params }) {
     const { id } = params;
 
     const user = await updateById(id, body);
